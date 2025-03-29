@@ -1,14 +1,34 @@
 package controller;
 
-import view.GameFrame;
 import model.GameState;
+import view.GameView;
+import model.board.*;
+import java.awt.event.*;
 
 public class GameController {
     private GameState model;
-    private GameFrame view;
+    private GameView view;
 
-    public GameController(GameState model, GameFrame view){
+    public GameController(GameState model, GameView view){
         this.model = model;
         this.view = view;
+
+        int maxRow = model.getBoard().getMaxRow();
+        int maxCol = model.getBoard().getMaxCol();
+
+        for (int row = 0; row < maxRow; row++){
+            for (int col = 0; col < maxCol; col++){
+                Tile tile = model.getBoard().getTile(row, col);
+                ActionListener al = new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        // add action
+                    }
+                };
+
+                this.view.displayTile(tile, row, col, al);
+            }
+        }
+
+        this.view.setFrameSize();
     }
 }
