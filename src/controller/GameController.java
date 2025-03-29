@@ -23,7 +23,9 @@ public class GameController {
                 Tile tile = model.getBoard().getTile(row, col);
                 ActionListener al = new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                        // add action
+                        // add action when tile is pressed
+                        /* check currentPlayer, if there is a piece and owner == currentPlayer, 
+                        highlight tile and allowMove (handled by GameState) */
                     }
                 };
 
