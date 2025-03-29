@@ -1,9 +1,7 @@
 package view;
 
-import model.GameState;
 import model.board.Board;
 import model.board.Tile;
-import model.pieces.Piece;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -11,17 +9,23 @@ import java.awt.event.ActionListener;
 public class GameView {
     private JFrame mainFrame;
     private BoardPanel boardPanel;
+    private InfoPanel infoPanel;
     private TileButton[][] tileGrid;
+    private JLabel playerTurnLbl;
 
     public GameView(Board board){
         this.mainFrame = new JFrame("Jungle King");
         this.tileGrid = new TileButton[board.getMaxRow()][board.getMaxCol()];
+        this.playerTurnLbl = new JLabel();
         this.mainFrame.setSize(800, 600);
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.mainFrame.setLayout(new BorderLayout());
 
         this.boardPanel = new BoardPanel(board);
+        this.infoPanel = new InfoPanel();
+        this.infoPanel.add(playerTurnLbl);
         this.mainFrame.add(boardPanel, BorderLayout.CENTER);
+        this.mainFrame.add(infoPanel, BorderLayout.EAST);
         this.mainFrame.setVisible(true);
     }
 
@@ -32,6 +36,10 @@ public class GameView {
         tileButton.addActionListener(al);
         tileGrid[row][col] = tileButton;
         this.boardPanel.add(tileButton);
+    }
+
+    public void updateInfo(String playerName){
+        this.playerTurnLbl.setText("Current Player: " + playerName);
     }
 
     public void setFrameSize(){
