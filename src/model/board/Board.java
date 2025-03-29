@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 import model.pieces.*;
 import model.Player;
-import model.board.*;
 
 public class Board {
     private int maxRow, maxCol;
     private Tile[][] gameGrid;
     private ArrayList<Player> players;
 
-    public Board(){
+    public Board(ArrayList<Player> players){
         this.maxRow = 7;
         this.maxCol = 9;
         this.gameGrid = new Tile[maxRow][maxCol];
-        this.players = new ArrayList<Player>();
+        this.players = players;
+
+        initializeBoard();
     }
 
     public int getMaxRow(){
@@ -26,20 +27,24 @@ public class Board {
         return this.maxCol;
     }
 
+    public Tile[][] getGameGrid(){
+        return this.gameGrid;
+    }
+
+    public Tile getTile(int row, int col){
+        return this.gameGrid[row][col];
+    }
+
     private void initializeBoard(){
-        createLake();
-        createBase();
-        createTrap();
-        for (int row = 0; row < maxRow; row++) {
-            for (int col = 0; col < maxCol; col++) {
-                if (!(gameGrid[row][col] instanceof Lake) &&
-                        !(gameGrid[row][col] instanceof HomeBase) &&
-                        !(gameGrid[row][col] instanceof Trap)) {
-                    gameGrid[row][col] = new Tile(row, col);
-                }
+        for (int row = 0; row < this.getMaxRow(); row++) {
+            for (int col = 0; col < this.getMaxCol(); col++) {
+                this.gameGrid[row][col] = new Tile(row, col);
             }
         }
 
+        createLake();
+        createBase();
+        createTrap();
         initializePieces();
         distributePieces();
     }
