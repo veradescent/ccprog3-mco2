@@ -13,6 +13,8 @@ public class GameController {
         this.model = model;
         this.view = view;
 
+        this.view.updateInfo(model.getCurrentPlayer().getName());
+
         int maxRow = model.getBoard().getMaxRow();
         int maxCol = model.getBoard().getMaxCol();
 
