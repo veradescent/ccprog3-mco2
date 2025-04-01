@@ -1,12 +1,12 @@
-import controller.GameController;
-import view.GameView;
 import model.GameState;
+import view.GameView;
+import controller.GameController;
 
 public class Main {
     public static void main(String[] args){
         GameState model = new GameState();
-        GameFrame view = new GameView(model.getBoard());
+        GameView view = new GameView(model.getBoard());
 
-        GameController controller = new GameController(model, view);
+        GameController gameController = new GameController(model, view);
     }
 }
