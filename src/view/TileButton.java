@@ -65,7 +65,7 @@ public class TileButton extends JButton {
     }
 
     private void setTileIcon(String tileName){
-        String path = "resources\\images\\" + pieceName + ".png";
+        String path = "resources\\images\\" + tileName + ".png";
         try {
             ImageIcon icon = new ImageIcon(path);
 
