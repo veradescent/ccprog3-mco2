@@ -46,7 +46,6 @@ public class Board {
         createBase();
         createTrap();
         initializePieces();
-        distributePieces();
     }
 
     private void createLake() {
