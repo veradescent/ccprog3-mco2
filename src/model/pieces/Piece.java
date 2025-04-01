@@ -5,15 +5,12 @@ import model.Player;
 public abstract class Piece {
     protected String name;
     protected int strength;
-    protected int row, col;
     protected Player owner;
     protected boolean trapped;
 
-    public Piece(String name, int strength, int row, int col, Player owner){
+    public Piece(String name, int strength, Player owner){
         this.name = name;
         this.strength = strength;
-        this.row = row;
-        this.col = col;
         this.owner = owner;
         this.trapped = false;
     }
@@ -28,10 +25,6 @@ public abstract class Piece {
 
     public Player getOwner(){
         return this.owner;
-    }
-
-    public boolean isTrapped(){
-        return this.trapped;
     }
 
     public boolean canCapture(Piece target){
@@ -52,7 +45,7 @@ public abstract class Piece {
 
         if (trapped == true){
             this.strength = 0;
-        } else if (trapped == false){ // i'll revise this since this is brute force palang
+        } else if (trapped == false){ 
             if (this instanceof Elephant){
                 this.strength = 8;
             } else if (this instanceof Lion){
