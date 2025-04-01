@@ -6,7 +6,9 @@ import view.TileButton;
 import model.board.*;
 import model.pieces.*;
 import java.awt.event.*;
-
+/**
+ * This class serves as the main controller of the Game, connecting both model and view
+ */
 public class GameController {
     private GameState model;
     private GameView view;
@@ -15,6 +17,11 @@ public class GameController {
     private Board board;
     private Tile selectedTile;
 
+    /**
+     * Constructs the initial controller where it sets the action for the clicking of Tiles
+     * @param model Game Model
+     * @param view Game View
+     */
     public GameController(GameState model, GameView view) {
         this.model = model;
         this.view = view;
@@ -41,6 +48,10 @@ public class GameController {
         this.view.setFrameSize();
     }
 
+    /**
+     * This method handles the logic for the clicking of Tiles and moving the Pieces
+     * @param clickedTile Tile clicked by Player
+     */
     private void handleTileClick(Tile clickedTile) {
         if (selectedTile == null) {
             if (clickedTile.getCurrentPiece() != null
@@ -53,6 +64,11 @@ public class GameController {
         }
     }
 
+    /**
+     * This method checks the move made by the Player and decides what to do with the move
+     * @param from Source tile
+     * @param to Destination tile
+     */
     private void checkMove(Tile from, Tile to) {
         Piece piece = from.getCurrentPiece();
         if (piece != null && piece.getOwner() == model.getCurrentPlayer()) { // If current player is playing
@@ -88,6 +104,7 @@ public class GameController {
                                     destination = null;
                                     break;
                                 }
+
                                 currentRow += step;
                             }
                         } else { // Horizontal jump
@@ -102,6 +119,7 @@ public class GameController {
                                     destination = null;
                                     break;
                                 }
+
                                 currentCol += step;
                             }
                         }
@@ -127,7 +145,7 @@ public class GameController {
 
                 // if previous tile is trap and next tile is not
                 else if (from instanceof Trap && !(to instanceof Trap)) {
-                     movePiece(from, to, piece);
+                    movePiece(from, to, piece);
                     piece.setTrapped(false);
                 } else {
                     view.displayError();
@@ -136,6 +154,12 @@ public class GameController {
         }
     }
 
+    /**
+     * This method updates the view once a Piece is moved
+     * @param from Source tile
+     * @param to Destination tile
+     * @param piece Selected piece
+     */
     private void movePiece(Tile from, Tile to, Piece piece){
         to.setCurrentPiece(piece);
         from.setCurrentPiece(null);
@@ -143,6 +167,12 @@ public class GameController {
         this.updateView(to, to.getRow(), to.getCol());
     }
 
+    /**
+     * This method checks if the source and destination tile is a valid move
+     * @param from Source tile
+     * @param to Destination tile
+     * @return true if valid, otherwise false
+     */
     private boolean isValidMove(Tile from, Tile to) {
         int rowDiff = Math.abs(from.getRow() - to.getRow());
         int colDiff = Math.abs(from.getCol() - to.getCol());
@@ -150,9 +180,16 @@ public class GameController {
         if ((rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1)) { // Ensure that piece is moving one tile at a time
             return isCaptureAllowed(from.getCurrentPiece(), to.getCurrentPiece());
         }
+
         return false;
     }
 
+    /**
+     * This method decides if the attacker is allowed to capture the specified target
+     * @param attacker Piece selected by Player
+     * @param target Opponent Piece to be attacked by Player
+     * @return true if capture is allowed, otherwise false
+     */
     private boolean isCaptureAllowed(Piece attacker, Piece target) {
         if (target == null) {
             return true;
@@ -161,6 +198,12 @@ public class GameController {
         return attacker.canCapture(target);
     }
 
+    /**
+     * This method updates the display of the Board and the InfoPanel depending on the state of the Board
+     * @param clickedTile Tile selected by Player
+     * @param row Row of Tile
+     * @param col Column of Tile
+     */
     private void updateView(Tile clickedTile, int row, int col) {
         this.view.updateBoard(clickedTile, row, col);
         this.view.updateBoard(selectedTile, selectedTile.getRow(), selectedTile.getCol());
