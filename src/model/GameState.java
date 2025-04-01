@@ -21,10 +21,6 @@ public class GameState {
         return this.currentPlayer;
     }
 
-    public ArrayList<Player> getPlayers(){
-        return this.players;
-    }
-
     public boolean isGameOver(){
         return this.gameOver;
     }
