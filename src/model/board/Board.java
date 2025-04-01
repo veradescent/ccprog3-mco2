@@ -81,51 +81,28 @@ public class Board {
     }
 
     private void initializePieces() {
-        gameGrid[0][0].setCurrentPiece(new Tiger(0, 0, this.players.get(0)));
-        gameGrid[6][8].setCurrentPiece(new Tiger(6, 8, this.players.get(1)));
+        gameGrid[0][0].setCurrentPiece(new Tiger(this.players.get(0)));
+        gameGrid[6][8].setCurrentPiece(new Tiger(this.players.get(1)));
     
-        gameGrid[6][0].setCurrentPiece(new Lion(6, 0, this.players.get(0)));
-        gameGrid[0][8].setCurrentPiece(new Lion(0, 8, this.players.get(1)));
+        gameGrid[6][0].setCurrentPiece(new Lion(this.players.get(0)));
+        gameGrid[0][8].setCurrentPiece(new Lion(this.players.get(1)));
     
-        gameGrid[1][1].setCurrentPiece(new Cat(1, 1, this.players.get(0)));
-        gameGrid[5][7].setCurrentPiece(new Cat(5, 7, this.players.get(1)));
+        gameGrid[1][1].setCurrentPiece(new Cat(this.players.get(0)));
+        gameGrid[5][7].setCurrentPiece(new Cat(this.players.get(1)));
     
-        gameGrid[5][1].setCurrentPiece(new Dog(5, 1, this.players.get(0)));
-        gameGrid[1][7].setCurrentPiece(new Dog(1, 7, this.players.get(1)));
+        gameGrid[5][1].setCurrentPiece(new Dog(this.players.get(0)));
+        gameGrid[1][7].setCurrentPiece(new Dog(this.players.get(1)));
     
-        gameGrid[0][2].setCurrentPiece(new Elephant(0, 2, this.players.get(0)));
-        gameGrid[6][6].setCurrentPiece(new Elephant(6, 6, this.players.get(1)));
+        gameGrid[0][2].setCurrentPiece(new Elephant(this.players.get(0)));
+        gameGrid[6][6].setCurrentPiece(new Elephant(this.players.get(1)));
     
-        gameGrid[2][2].setCurrentPiece(new Wolf(2, 2, this.players.get(0)));
-        gameGrid[4][6].setCurrentPiece(new Wolf(4, 6, this.players.get(1)));
+        gameGrid[2][2].setCurrentPiece(new Wolf(this.players.get(0)));
+        gameGrid[4][6].setCurrentPiece(new Wolf(this.players.get(1)));
     
-        gameGrid[4][2].setCurrentPiece(new Leopard(4, 2, this.players.get(0)));
-        gameGrid[2][6].setCurrentPiece(new Leopard(2, 6, this.players.get(1)));
+        gameGrid[4][2].setCurrentPiece(new Leopard(this.players.get(0)));
+        gameGrid[2][6].setCurrentPiece(new Leopard(this.players.get(1)));
     
-        gameGrid[6][2].setCurrentPiece(new Rat(6, 2, this.players.get(0)));
-        gameGrid[0][6].setCurrentPiece(new Rat(0, 6, this.players.get(1)));
-    }
-
-    public void distributePieces() {
-        ArrayList<Piece> pieces1 = new ArrayList<Piece>();
-        ArrayList<Piece> pieces2 = new ArrayList<Piece>();
-        
-        for (int row = 0; row < maxRow; row++) {
-            for (int col = 0; col < maxCol; col++) {
-                if (gameGrid[row][col].hasPiece()){
-                    Piece piece = gameGrid[row][col].getCurrentPiece();
-                    if (piece.getOwner().equals(players.get(0))){
-                        pieces1.add(piece);
-                    }
-                    
-                    else if (piece.getOwner().equals(players.get(1))){
-                        pieces2.add(piece);
-                    }
-                }
-            }
-        }
-
-        players.get(0).setPieces(pieces1);
-        players.get(1).setPieces(pieces2);
+        gameGrid[6][2].setCurrentPiece(new Rat(this.players.get(0)));
+        gameGrid[0][6].setCurrentPiece(new Rat(this.players.get(1)));
     }
 }
