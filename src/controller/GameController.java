@@ -68,8 +68,12 @@ public class GameController {
                     movePiece(from, to, piece);
                 }
 
+                else if (to instanceof Lake && (piece instanceof Rat)) {
+                    movePiece(from, to, piece);
+                }
+
                 // Special handling for Lion/Tiger crossing a lake
-                else if (to instanceof Lake && (piece instanceof Lion || piece instanceof Tiger || piece instanceof Rat)) {
+                else if (to instanceof Lake && (piece instanceof Lion || piece instanceof Tiger)) {
                     Tile destination = null;
 
                     // Determine new destination after crossing lake
@@ -216,3 +220,4 @@ public class GameController {
         this.view.updateInfo(model.getCurrentPlayer().getName());
         this.view.removeError();
     }
+}
