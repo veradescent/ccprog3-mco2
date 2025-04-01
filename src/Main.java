@@ -11,10 +11,4 @@ public class Main {
         public static void main(String[] args) {
             SwingUtilities.invokeLater(MinigameFrame::new);
         }
-    
-        private static void startGame(int firstPlayer) {
-            GameState model = new GameState();
-            GameView view = new GameView(model.getBoard());
-            GameController gameController = new GameController(model, view, firstPlayer);
-        }
     }

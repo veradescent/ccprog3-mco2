@@ -1,6 +1,8 @@
 package view;
 
+import model.board.HomeBase;
 import model.board.Tile;
+import model.board.Trap;
 import model.pieces.*;
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,9 @@ public class TileButton extends JButton {
     private static final Color LAKE_COLOR = Color.BLUE;
     private static final Color TRAP_COLOR = Color.GRAY;
     private static final Color HOMEBASE_COLOR = Color.RED;
+    private static final Color PLAYER_1_COLOR = new Color(255,102,102);
+    private static final Color PLAYER_2_COLOR = new Color(51,204,255);
+
 
     public TileButton(Tile tile){
         super();
@@ -29,6 +34,7 @@ public class TileButton extends JButton {
             setPieceIcon(piece);
         } else {
             setIcon(null);
+            this.setBackground(this.getTileColor());
         }
     }
 
@@ -43,6 +49,13 @@ public class TileButton extends JButton {
             setIcon(new ImageIcon(scaledImage));
         } catch (Exception e){
             System.err.println("Error loading image: " + path);
+        }
+
+        if(piece.getOwner().getName() == "Player 1"){
+            this.setBackground(PLAYER_1_COLOR);
+        }
+        else if(piece.getOwner().getName() == "Player 2"){
+            this.setBackground(PLAYER_2_COLOR);
         }
     }
 
