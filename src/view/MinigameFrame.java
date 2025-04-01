@@ -71,13 +71,13 @@ public class MinigameFrame extends JFrame {
         Animal p2Animal = animals.get(p2Choice);
 
         if (p1Animal.getStrength() > p2Animal.getStrength()) {
-            firstPlayer = 1;
+            firstPlayer = 0;
             JOptionPane.showMessageDialog(this, "Player 1 goes first! " + p1Animal.getName() + " is stronger than " + p2Animal.getName() + "!");
         } else if (p2Animal.getStrength() > p1Animal.getStrength()) {
-            firstPlayer = 2;
+            firstPlayer = 1;
             JOptionPane.showMessageDialog(this, "Player 2 goes first! " + p2Animal.getName() + " is stronger than " + p1Animal.getName() + "!");
         } else {
-            firstPlayer = new Random().nextBoolean() ? 1 : 2;
+            firstPlayer = new Random().nextBoolean() ? 0 : 1;
             JOptionPane.showMessageDialog(this, "It's a tie! Randomly selecting Player " + firstPlayer + " to go first.");
         }
 
@@ -86,8 +86,8 @@ public class MinigameFrame extends JFrame {
 
     private void startMainGame() {
         dispose();
-        GameState model = new GameState();
+        GameState model = new GameState(firstPlayer);
         GameView view = new GameView(model.getBoard());
-        GameController gameController = new GameController(model, view, firstPlayer);
+        GameController gameController = new GameController(model, view);
     }
 }
