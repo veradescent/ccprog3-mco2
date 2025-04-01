@@ -29,8 +29,16 @@ public class GameState {
         return this.gameOver;
     }
 
+    public void setGameOver(boolean gameOver){
+        this.gameOver = gameOver;
+    }
+
     public void resetGame(){
         initializeGame();
+    }
+
+    public void switchTurn(){
+        this.currentPlayer = (currentPlayer == players.get(0)) ? players.get(1) : players.get(0); // check
     }
 
     private void initializeGame(){
@@ -39,5 +47,8 @@ public class GameState {
         this.players.add(new Player("Player 2"));
         this.board = new Board(players);
         this.currentPlayer = this.players.get(0);
+        this.gameOver = false;
     }
+
+    // add getWinner method
 }
