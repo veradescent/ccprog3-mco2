@@ -9,12 +9,14 @@ import java.awt.*;
 
 public class TileButton extends JButton {
     private Tile tile;
-
+    
     private static final Color REGULAR_TILE_COLOR = Color.WHITE;
     private static final Color LAKE_COLOR = Color.BLUE;
+    private static final Color TRAP_COLOR = Color.GRAY;
+    private static final Color HOMEBASE_1_COLOR = new Color(255,102,102);
+    private static final Color HOMEBASE_2_COLOR = new Color(51,204,255);
     private static final Color PLAYER_1_COLOR = new Color(255,102,102);
     private static final Color PLAYER_2_COLOR = new Color(51,204,255);
-
 
     public TileButton(Tile tile){
         super();
@@ -76,9 +78,15 @@ public class TileButton extends JButton {
         }
     }
 
-    private Color getTileColor(){
+   private Color getTileColor(){
         if (tile instanceof model.board.Lake){
             return LAKE_COLOR;
+        } else if (tile instanceof model.board.Trap){
+            return TRAP_COLOR;
+        } else if (tile instanceof model.board.HomeBase && ((model.board.HomeBase)tile).getOwner().getName().equals("Player 1")){
+            return HOMEBASE_1_COLOR;
+        } else if (tile instanceof model.board.HomeBase && ((model.board.HomeBase)tile).getOwner().getName().equals("Player 2")){
+            return HOMEBASE_2_COLOR;
         } else {
             return REGULAR_TILE_COLOR;
         }
