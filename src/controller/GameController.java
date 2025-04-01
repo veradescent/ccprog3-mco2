@@ -127,7 +127,9 @@ public class GameController {
 
                     if (destination != null) {
                         to = destination;
-                        movePiece(from, to, piece);
+                        if (isCaptureAllowed(piece, to.getCurrentPiece())){
+                            movePiece(from, to, piece);
+                        }
                     }
                 }
 
