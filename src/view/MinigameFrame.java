@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
+/**
+ * This class serves as the view responsible for selecting the player who will play first in the main game
+ */
 public class MinigameFrame extends JFrame {
     private ArrayList<Animal> animals;
     private Animal winningAnimal;
@@ -17,6 +20,9 @@ public class MinigameFrame extends JFrame {
     private JButton[] buttons;
     private int firstPlayer;
 
+    /**
+     * Constructs an initial frame for the mini-game in selecting the first player
+     */
     public MinigameFrame() {
         animals = new ArrayList<>(Arrays.asList(
             new Animal("Lion", 7),
@@ -52,6 +58,10 @@ public class MinigameFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * This method handles the display of the Pieces once selected by Player
+     * @param index Index of selected button
+     */
     private void handleTileSelection(int index) {
         String path = "resources\\images\\" + animals.get(index).getName().toLowerCase() + ".png";
         ImageIcon icon = new ImageIcon(path);
@@ -66,6 +76,9 @@ public class MinigameFrame extends JFrame {
         }
     }
 
+    /**
+     * This method compares the choices of the Player and decides who will play first
+     */
     private void determineWinner() {
         Animal p1Animal = animals.get(p1Choice);
         Animal p2Animal = animals.get(p2Choice);
@@ -84,6 +97,9 @@ public class MinigameFrame extends JFrame {
         startMainGame();
     }
 
+    /**
+     * This method starts the main game once the first player has been selected
+     */
     private void startMainGame() {
         dispose();
         GameState model = new GameState(firstPlayer);
