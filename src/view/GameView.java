@@ -31,11 +31,15 @@ public class GameView {
 
     public void displayTile(Tile tile, int row, int col, ActionListener al){
         TileButton tileButton = new TileButton(tile);
-        tileButton.updateTile();
+        tileButton.updateTile(tile);
         tileButton.setPreferredSize(new Dimension(40, 40));
         tileButton.addActionListener(al);
         tileGrid[row][col] = tileButton;
         this.boardPanel.add(tileButton);
+    }
+
+    public void updateBoard(Tile tile, int row, int col){
+        this.tileGrid[row][col].updateTile(tile);
     }
 
     public void updateInfo(String playerName){
