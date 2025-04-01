@@ -7,6 +7,9 @@ import model.pieces.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class serves as the Tile view of the game
+ */
 public class TileButton extends JButton {
     private Tile tile;
     
@@ -18,16 +21,28 @@ public class TileButton extends JButton {
     private static final Color PLAYER_1_COLOR = new Color(255,102,102);
     private static final Color PLAYER_2_COLOR = new Color(51,204,255);
 
+    /**
+     * Constructs a TileButton with the associated Tile model
+     * @param tile Tile model
+     */
     public TileButton(Tile tile){
         super();
         this.tile = tile;
         this.setBackground(this.getTileColor());
     }
 
-    public Tile getTile(){ // remove?
+    /**
+     * This is a getter method for the Tile
+     * @return Tile model associated with TileButton
+     */
+    public Tile getTile(){
         return this.tile;
     }
 
+    /**
+     * This method updates the icon of the TileButton according to the Tile it is representing
+     * @param tile Tile model associated with TileButton
+     */
     public void updateTile(Tile tile){
         Piece piece = tile.getCurrentPiece();
         if (piece != null){
@@ -45,6 +60,10 @@ public class TileButton extends JButton {
         }
     }
 
+    /**
+     * This method sets the piece icon as an image
+     * @param piece Piece to be placed in TileButton
+     */
     private void setPieceIcon(Piece piece){
         String pieceName = piece.getName().toLowerCase();
         String path = "resources\\images\\" + pieceName + ".png"; // Absolute path
@@ -66,6 +85,10 @@ public class TileButton extends JButton {
         }
     }
 
+    /**
+     * This method sets the tile icon as an image
+     * @param tileName Name of Tile
+     */
     private void setTileIcon(String tileName){
         String path = "resources\\images\\" + tileName + ".png";
         try {
@@ -78,6 +101,10 @@ public class TileButton extends JButton {
         }
     }
 
+    /**
+     * This method sets the color of the Tile it is representing
+     * @return Color of Tile
+     */
    private Color getTileColor(){
         if (tile instanceof model.board.Lake){
             return LAKE_COLOR;
