@@ -16,19 +16,28 @@ public abstract class Piece {
         this.owner = owner;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
+    public int getStrength(){
+        return this.strength;
+    }
+
     public Player getOwner(){
         return this.owner;
     }
 
-    public boolean canCapture(Piece target){
-        if (this instanceof Rat && target instanceof Elephant){
-            return true;
+    public boolean canCapture(Piece target){ // check
+        boolean flag = this.strength >= target.getStrength();
+        if (target.getOwner() == this.owner){
+            flag = false;
         }
 
-        return this.strength >= target.strength;
+        return flag;
     }
 
-    public void move(int newRow, int newCol){
+    public void move(int newRow, int newCol){ // haven't implemented this yet
         this.row = newRow;
         this.col = newCol;
     }
