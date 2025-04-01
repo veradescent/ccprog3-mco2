@@ -13,6 +13,14 @@ public class Tile {
         this.currentPiece = null;
     }
 
+    public int getRow(){
+        return this.row;
+    }
+
+    public int getCol(){
+        return this.col;
+    }
+
     public Piece getCurrentPiece(){
         return this.currentPiece;
     }
