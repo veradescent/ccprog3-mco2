@@ -61,17 +61,52 @@ public class GameController {
                 if (to.getCurrentPiece() != null && piece.canCapture(to.getCurrentPiece())){
                     to.setCurrentPiece(null); // Capture opponent piece
                 }
+            // Special handling for Lion/Tiger crossing a lake
+            if (piece instanceof Lion || piece instanceof Tiger) {
+                Tile destination = null;
+    
+               // Determine new destination after crossing lake
+               if (from.getRow() == to.getRow() || from.getCol() == to.getCol()) {
+        
+                 if (from.getCol() == to.getCol()) { // Vertical jump
+                     int step = (to.getRow() > from.getRow()) ? 1 : -1;
+                     int currentRow = from.getRow() + step;
+                     while (currentRow >= 0 && currentRow < board.getMaxRow()) {
+                         Tile currentTile = board.getTile(currentRow, from.getCol());
+                         if (!(currentTile instanceof Lake)) {
+                             destination = currentTile;
+                             break;
+                            }
+                            currentRow += step;
+                        }
+                    } else { // Horizontal jump
+                        int step = (to.getCol() > from.getCol()) ? 1 : -1;
+                        int currentCol = from.getCol() + step;
+                       while (currentCol >= 0 && currentCol < board.getMaxCol()) {
+                           Tile currentTile = board.getTile(from.getRow(), currentCol);
+                           if (!(currentTile instanceof Lake)) {
+                               destination = currentTile;
+                               break;
+                           }
+                           currentCol += step;
+                       }
+                    }
+             }
+    
+              if (destination != null) {
+                    to = destination;
+              }
+            }
 
-                to.setCurrentPiece(piece);
-                from.setCurrentPiece(null);
+            to.setCurrentPiece(piece);
+            from.setCurrentPiece(null);
 
-                // check victory condition
+            // Check victory condition
 
-                model.switchTurn();
+            model.switchTurn();
             }
         }
-
-        updateView(to, to.getRow(), to.getCol());
+            updateView(to, to.getRow(), to.getCol());
     }
 
     private boolean isValidMove(Tile from, Tile to){
@@ -82,13 +117,60 @@ public class GameController {
             return isCaptureAllowed(from.getCurrentPiece(), to.getCurrentPiece());
         }
 
+        //Special Swimmer Condition
         if(((rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1)) && to instanceof Lake){
-            if(from.getCurrentPiece() instanceof Swimmer){
-            return isCaptureAllowed(from.getCurrentPiece(), to.getCurrentPiece());
+            //Special Rat condition
+            if(from.getCurrentPiece() instanceof Swimmer && from.getCurrentPiece() instanceof Rat){
+                return isCaptureAllowed(from.getCurrentPiece(), to.getCurrentPiece());
+            }
+            //Special Lion/Tiger Condition Checker (Cross)
+            if (from.getCurrentPiece() instanceof Lion || from.getCurrentPiece() instanceof Tiger) {
+                Tile destination = null;
+                
+                    // Vertical cross
+                    if (colDiff == 0) {
+                        int step = (to.getRow() > from.getRow()) ? 1 : -1;
+                        int currentRow = from.getRow() + step;
+                        
+                        // Checking Lake Tiles
+                        while (currentRow >= 0 && currentRow < board.getMaxRow()) {
+                            Tile currentTile = board.getTile(currentRow, from.getCol());
+                            if (!(currentTile instanceof Lake)) {
+                                destination = currentTile;
+                                break;
+                            }
+                            if (currentTile.hasPiece()) {
+                                return false; // Blocked by a piece in the lake
+                            }
+                            currentRow += step;
+                        }
+                    } 
+                    // Horizontal Cross
+                    else if (rowDiff == 0) {
+                        int step = (to.getCol() > from.getCol()) ? 1 : -1;
+                        int currentCol = from.getCol() + step;
+                        
+                        // Checking Lake Tiles
+                        while (currentCol >= 0 && currentCol < board.getMaxCol()) {
+                            Tile currentTile = board.getTile(from.getRow(), currentCol);
+                            if (!(currentTile instanceof Lake)) {
+                                destination = currentTile;
+                                break;
+                            }
+                            if (currentTile.hasPiece()) {
+                                return false; // Blocked by peice in Lake
+                            }
+                            currentCol += step;
+                        }
+                    }
+                
+                // If a valid destination was found, update `to` and validate capture
+                if (destination != null && destination != from) {
+                    return isCaptureAllowed(from.getCurrentPiece(), destination.getCurrentPiece());
+                }
             }
         }
-
-        return false;
+            return false;
     }
 
     private boolean isCaptureAllowed(Piece attacker, Piece target){

@@ -10,8 +10,4 @@ public class Tiger extends Piece implements Swimmer{
     public boolean crossLake(){
         return true;
     }
-
-    public boolean swim(){
-        return false;
-    }
 }

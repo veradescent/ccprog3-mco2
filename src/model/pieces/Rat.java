@@ -10,8 +10,4 @@ public class Rat extends Piece implements Swimmer{
     public boolean crossLake(){
         return false;
     }
-
-    public boolean swim(){
-        return true;
-    }
 }
