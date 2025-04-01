@@ -10,4 +10,8 @@ public class HomeBase extends Tile {
         super(row, col);
         this.owner = owner;
     }
+
+    public Player getOwner(){
+        return this.owner;
+    }
 }

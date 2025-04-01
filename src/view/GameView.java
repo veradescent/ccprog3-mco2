@@ -11,19 +11,22 @@ public class GameView {
     private BoardPanel boardPanel;
     private InfoPanel infoPanel;
     private TileButton[][] tileGrid;
-    private JLabel playerTurnLbl;
+    private JTextArea playerTurnLbl;
+    private JTextArea errorLbl;
 
     public GameView(Board board){
         this.mainFrame = new JFrame("Jungle King");
         this.tileGrid = new TileButton[board.getMaxRow()][board.getMaxCol()];
-        this.playerTurnLbl = new JLabel();
+     
         this.mainFrame.setSize(800, 600);
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.mainFrame.setLayout(new BorderLayout());
 
         this.boardPanel = new BoardPanel(board);
         this.infoPanel = new InfoPanel();
-        this.infoPanel.add(playerTurnLbl);
+        this.playerTurnLbl = new JTextArea();
+        this.errorLbl = new JTextArea();
+       
         this.mainFrame.add(boardPanel, BorderLayout.CENTER);
         this.mainFrame.add(infoPanel, BorderLayout.EAST);
         this.mainFrame.setVisible(true);
@@ -46,7 +49,21 @@ public class GameView {
         this.playerTurnLbl.setText("Current Player: " + playerName);
     }
 
+     public void displayError(){
+        this.errorLbl.setText("Invalid move. Try again.");
+        this.infoPanel.add(errorLbl, FlowLayout.CENTER);
+        this.errorLbl.setVisible(true);
+    }
+
+    public void removeError(){
+        this.errorLbl.setVisible(false);
+    }
+
     public void setFrameSize(){
         this.mainFrame.pack();
+    }
+
+    public void showWinner(String winner){
+        JOptionPane.showMessageDialog(this.mainFrame, winner + " wins the game!");
     }
 }
