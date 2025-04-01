@@ -16,11 +16,15 @@ public class TileButton extends JButton {
     public TileButton(Tile tile){
         super();
         this.tile = tile;
+        this.setBackground(this.getTileColor());
     }
 
-    public void updateTile(){
-        this.setBackground(this.getTileColor());
-        Piece piece = this.tile.getCurrentPiece();
+    public Tile getTile(){
+        return this.tile;
+    }
+
+    public void updateTile(Tile tile){
+        Piece piece = tile.getCurrentPiece();
         if (piece != null){
             setPieceIcon(piece);
         } else {
