@@ -31,7 +31,7 @@ public class MinigameFrame extends JFrame {
         Collections.shuffle(animals);
         winningAnimal = animals.get(new Random().nextInt(animals.size()));
 
-        setTitle("Who get's the First Turn?");
+        setTitle("Turn Picking Minigame");
         setSize(400, 300);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
