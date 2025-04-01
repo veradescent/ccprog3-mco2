@@ -1,23 +1,28 @@
 package controller;
 
 import model.GameState;
+import model.Player;
 import view.GameView;
 import view.TileButton;
 import model.board.*;
 import model.pieces.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameController {
     private GameState model;
     private GameView view;
+    private int currentPlayer;
     private int maxRow;
     private int maxCol;
     private Board board;
     private Tile selectedTile;
 
-    public GameController(GameState model, GameView view){
+    public GameController(GameState model, GameView view, int firstPlayer){
         this.model = model;
         this.view = view;
+        this.currentPlayer = firstPlayer;
 
         this.view.updateInfo(model.getCurrentPlayer().getName());
         this.board = model.getBoard();

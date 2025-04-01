@@ -39,7 +39,7 @@ public class TileButton extends JButton {
         try {
             ImageIcon icon = new ImageIcon(path);
 
-            Image scaledImage = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+            Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             setIcon(new ImageIcon(scaledImage));
         } catch (Exception e){
             System.err.println("Error loading image: " + path);
