@@ -34,7 +34,7 @@ public class TileButton extends JButton {
 
     private void setPieceIcon(Piece piece){
         String pieceName = piece.getName().toLowerCase();
-        String path = "D:/Documents/College Files/1st Year/Term 3/CCPROG3/mco2/resources/images/" + pieceName + ".png"; // Absolute path
+        String path = "resources\\images\\" + pieceName + ".png"; // Absolute path
 
         try {
             ImageIcon icon = new ImageIcon(path);

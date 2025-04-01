@@ -78,8 +78,14 @@ public class GameController {
         int rowDiff = Math.abs(from.getRow() - to.getRow());
         int colDiff = Math.abs(from.getCol() - to.getCol());
 
-        if ((rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1)){
+        if (((rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1)) && !(to instanceof Lake)){
             return isCaptureAllowed(from.getCurrentPiece(), to.getCurrentPiece());
+        }
+
+        if(((rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1)) && to instanceof Lake){
+            if(from.getCurrentPiece() instanceof Swimmer){
+            return isCaptureAllowed(from.getCurrentPiece(), to.getCurrentPiece());
+            }
         }
 
         return false;
