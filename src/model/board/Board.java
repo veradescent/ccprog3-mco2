@@ -5,11 +5,18 @@ import java.util.ArrayList;
 import model.pieces.*;
 import model.Player;
 
+/**
+ * This class serves as the main Board model of the game
+ */
 public class Board {
     private int maxRow, maxCol;
     private Tile[][] gameGrid;
     private ArrayList<Player> players;
 
+    /**
+     * Constructs an initial 7x9 board with a given array of Players
+     * @param players
+     */
     public Board(ArrayList<Player> players){
         this.maxRow = 7;
         this.maxCol = 9;
@@ -19,22 +26,43 @@ public class Board {
         initializeBoard();
     }
 
+    /**
+     * This is the getter method for the max number of rows
+     * @return Max rows
+     */
     public int getMaxRow(){
         return this.maxRow;
     }
 
+    /**
+     * This is the getter method for the max number of columns
+     * @return Max columns
+     */
     public int getMaxCol(){
         return this.maxCol;
     }
 
+    /**
+     * This is the getter method for the tiles contained in the Board
+     * @return Tile array
+     */
     public Tile[][] getGameGrid(){
         return this.gameGrid;
     }
 
+    /**
+     * This is the getter method for the corresponding Tile given by its row and column
+     * @param row Row of tile
+     * @param col Column of tile
+     * @return Tile
+     */
     public Tile getTile(int row, int col){
         return this.gameGrid[row][col];
     }
 
+    /**
+     * This method initializes the contents of the Board
+     */
     private void initializeBoard(){
         for (int row = 0; row < this.getMaxRow(); row++) {
             for (int col = 0; col < this.getMaxCol(); col++) {
@@ -48,6 +76,9 @@ public class Board {
         initializePieces();
     }
 
+    /**
+     * This method initializes the positions of the Lake
+     */
     private void createLake() {
         gameGrid[1][3] = new Lake(1, 3);
         gameGrid[2][3] = new Lake(2, 3);
@@ -65,11 +96,17 @@ public class Board {
         gameGrid[5][5] = new Lake(5, 5);
     }
 
+    /**
+     * This method initializes the positions of the HomeBase
+     */
     private void createBase() {
         gameGrid[3][0] = new HomeBase(3, 0, this.players.get(0));
         gameGrid[3][8] = new HomeBase(3, 8, this.players.get(1));
     }
 
+    /**
+     * This  method initializes the positions of the Trap
+     */
     private void createTrap() {
         gameGrid[2][0] = new Trap(2, 0, this.players.get(0));
         gameGrid[4][0] = new Trap(4, 0, this.players.get(0));
@@ -79,6 +116,9 @@ public class Board {
         gameGrid[3][7] = new Trap(3, 7, this.players.get(1));
     }
 
+    /**
+     * This method initializes the positions of the Pieces
+     */
     private void initializePieces() {
         gameGrid[0][0].setCurrentPiece(new Tiger(this.players.get(0)));
         gameGrid[6][8].setCurrentPiece(new Tiger(this.players.get(1)));
