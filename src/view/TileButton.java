@@ -12,7 +12,7 @@ public class TileButton extends JButton {
     
     private static final Color REGULAR_TILE_COLOR = Color.WHITE;
     private static final Color LAKE_COLOR = Color.BLUE;
-    private static final Color TRAP_COLOR = Color.GRAY;
+    private static final Color TRAP_COLOR = new Color(204,204,204);
     private static final Color HOMEBASE_1_COLOR = new Color(255,102,102);
     private static final Color HOMEBASE_2_COLOR = new Color(51,204,255);
     private static final Color PLAYER_1_COLOR = new Color(255,102,102);
