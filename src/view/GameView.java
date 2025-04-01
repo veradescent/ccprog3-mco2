@@ -28,7 +28,7 @@ public class GameView {
         this.errorLbl = new JTextArea();
        
         this.mainFrame.add(boardPanel, BorderLayout.CENTER);
-        this.mainFrame.add(infoPanel, BorderLayout.EAST);
+        this.mainFrame.add(infoPanel, BorderLayout.SOUTH);
         this.mainFrame.setVisible(true);
     }
 
